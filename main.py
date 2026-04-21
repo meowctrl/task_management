@@ -1,5 +1,5 @@
 # Import functions from task_manager.task_utils
-from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress
+from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress, tasks
 
 # Define the main function
 def main():
@@ -27,7 +27,7 @@ def main():
         elif choice == "3":
             view_pending_tasks()
         elif choice == "4":
-            progress = calculate_progress()
+            progress = calculate_progress(tasks)
             print(f"Progress: {progress:.2f}%")
         elif choice == "5":
             print("Exiting the program...")
