@@ -45,22 +45,18 @@ def mark_task_as_complete(index):
     
 # Implement view_pending_tasks function
 def view_pending_tasks():
-    try:
-        pending = [t for t in tasks if t.get('status') == 'pending']
-        if not pending:
-            print("No pending tasks.")
-        else:
-            for i, task in enumerate(pending):
-                title = task.get('title', 'Unknown')
-                desc = task.get('description', 'No description')
-                due = task.get('due_date', 'No due date')
-                print(f"{i+1}. {title} - {desc} - Due: {due}")
-    except Exception as e:
-        print(f"Error viewing pending tasks: {e}")
+    pending = [t for t in tasks if t['status'] == 'pending']
+    if not pending:
+        print("No pending tasks.")
+    else:
+        for i, task in enumerate(pending):
+            print(f"{i+1}. {task['title']} - {task['description']} - Due: {task['due_date']}")
 
 # Implement calculate_progress function
-def calculate_progress(tasks_list):
-        if not tasks_list:
-            return 0
-        completed = sum(1 for t in tasks_list if t.get('status') == 'completed')
-        return (completed / len(tasks_list)) * 100
+def calculate_progress(tasks_list=None):
+    if tasks_list is None:
+        tasks_list = tasks
+    if not tasks_list:
+        return 0
+    completed = sum(1 for t in tasks_list if t.get('status') == 'completed')
+    return (completed / len(tasks_list)) * 100
